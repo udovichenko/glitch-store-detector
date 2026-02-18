@@ -4,9 +4,11 @@
   "private": true,
   "description": "QR-code landing page for Glitch app store redirect",
   "scripts": {
+    "dev": "live-server --port=3000 --no-browser",
     "generate-qr": "node generate-qr.js"
   },
   "devDependencies": {
+    "live-server": "^1.2.2",
     "qrcode": "^1.5.4"
   }
 }

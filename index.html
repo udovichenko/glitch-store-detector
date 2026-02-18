@@ -7,17 +7,16 @@
   <meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
   <style>
-    /* ── Reset & Base ── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     :root {
       --bg: #ffffff;
       --text: #111111;
       --text-secondary: #666666;
-      --card-bg: #f5f5f5;
-      --card-border: #e0e0e0;
-      --badge-bg: #111111;
-      --badge-text: #ffffff;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -25,20 +24,16 @@
         --bg: #111111;
         --text: #f0f0f0;
         --text-secondary: #999999;
-        --card-bg: #1a1a1a;
-        --card-border: #2a2a2a;
-        --badge-bg: #ffffff;
-        --badge-text: #111111;
       }
     }
 
     html, body {
       height: 100%;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg);
+      background: var(--bg) url('/img/bg.svg') repeat center center;
+      background-size: 600px;
       color: var(--text);
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
 
     body {
@@ -49,106 +44,63 @@
       padding: 24px;
     }
 
-    /* ── Container ── */
     .container {
       width: 100%;
-      max-width: 380px;
+      max-width: 340px;
       text-align: center;
     }
 
-    .app-icon {
-      width: 80px;
-      height: 80px;
-      border-radius: 18px;
-      margin: 0 auto 16px;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 36px;
-      overflow: hidden;
-    }
-
-    .app-icon img {
+    .logo {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      margin: 0 auto 20px;
+      display: block;
     }
 
     h1 {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 4px;
-      letter-spacing: -0.02em;
-    }
-
-    .subtitle {
-      font-size: 14px;
-      color: var(--text-secondary);
+      font-size: min(calc(12px + 0.4vw), 17px); /* 360:13 - 1440:17 */;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
       margin-bottom: 28px;
+      line-height: 1.3;
     }
 
-    /* ── Store links ── */
     .store-list {
       display: flex;
       flex-direction: column;
       gap: 12px;
+      align-items: center;
     }
 
     .store-link {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 14px 18px;
-      border-radius: 14px;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      text-decoration: none;
-      color: var(--text);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      display: block;
+      transition: transform 0.15s ease;
+      border: 0.5px solid white;
+      border-radius: 12px;
+      position: relative;
+      width: 290px;
+      height: 60px;
+      background: rgb(17 17 17 / 100%);
     }
 
     .store-link:active {
-      transform: scale(0.97);
+      transform: scale(0.96);
     }
 
-    .store-link-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .store-link img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 52px;
+      width: auto;
+      display: block;
     }
 
-    .store-link-icon svg {
-      width: 24px;
-      height: 24px;
-    }
-
-    .store-link-info {
-      text-align: left;
-    }
-
-    .store-link-label {
-      font-size: 11px;
-      color: var(--text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-bottom: 2px;
-    }
-
-    .store-link-name {
-      font-size: 16px;
-      font-weight: 600;
-    }
-
-    /* ── Redirect (iOS) screen ── */
     .redirect-message {
       font-size: 14px;
       color: var(--text-secondary);
+      margin-top: 8px;
     }
 
     .redirect-message a {
@@ -157,194 +109,128 @@
       text-underline-offset: 2px;
     }
 
-    /* ── Loading / Detecting ── */
-    .detecting {
-      font-size: 14px;
-      color: var(--text-secondary);
+    .hidden {
+      display: none !important;
     }
 
     .spinner {
       display: inline-block;
       width: 20px;
       height: 20px;
-      border: 2px solid var(--card-border);
+      border: 2px solid var(--text-secondary);
       border-top-color: var(--text);
       border-radius: 50%;
       animation: spin 0.6s linear infinite;
       margin-bottom: 8px;
     }
 
-    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
 
-    /* ── Hidden by default ── */
-    .hidden { display: none !important; }
+    .detecting {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
   </style>
 </head>
 <body>
-  <!-- Detecting screen -->
+
+  <!-- Detecting -->
   <div class="container" id="screen-detecting">
     <div class="spinner"></div>
     <p class="detecting">Определяем устройство…</p>
   </div>
 
-  <!-- iOS redirect screen -->
+  <!-- iOS -->
   <div class="container hidden" id="screen-ios">
-    <div class="app-icon">G</div>
-    <h1>Glitch</h1>
-    <p class="subtitle">Перенаправляем в App Store…</p>
-    <p class="redirect-message">
-      Если ничего не произошло, <a id="ios-manual-link" href="#">нажмите здесь</a>.
-    </p>
+    <img class="logo" src="img/glitch-logo.webp" alt="Glitch">
+    <h1>Скачай мобильное приложение</h1>
+    <div class="store-list">
+      <a class="store-link" id="ios-link" href="https://apps.apple.com/ru/app/glitch/id6746337888">
+        <img src="img/appstore.svg" alt="App Store">
+      </a>
+    </div>
+    <p class="redirect-message">Перенаправляем в App Store…<br>Если ничего не произошло, <a
+      href="https://apps.apple.com/ru/app/glitch/id6746337888">нажмите здесь</a>.</p>
   </div>
 
-  <!-- Android / Other store selection screen -->
+  <!-- Android -->
   <div class="container hidden" id="screen-android">
-    <div class="app-icon">G</div>
-    <h1>Glitch</h1>
-    <p class="subtitle">Выберите магазин приложений</p>
-    <div class="store-list" id="store-list">
-      <!-- Populated by JS -->
+    <img class="logo" src="img/glitch-logo.webp" alt="Glitch">
+    <h1>Скачай мобильное приложение</h1>
+    <div class="store-list">
+      <a class="store-link" href="https://drive.google.com/file/d/13YxgMHuw981OzaufwkYe6838OjfvfNii/view?usp=sharing"
+        target="_blank" rel="noopener">
+        <img src="img/googlestore.svg" alt="Google Play">
+      </a>
+      <a class="store-link" href="https://www.rustore.ru/catalog" target="_blank" rel="noopener">
+        <img src="img/appgallery.svg" alt="RuStore">
+      </a>
+      <a class="store-link" href="https://appgallery.huawei.com/" target="_blank" rel="noopener">
+        <img src="img/appgallery.svg" alt="AppGallery">
+      </a>
+      <a class="store-link" href="https://drive.google.com/file/d/13YxgMHuw981OzaufwkYe6838OjfvfNii/view?usp=sharing"
+        target="_blank" rel="noopener">
+        <img src="img/apk.svg" alt="Скачать APK">
+      </a>
     </div>
   </div>
 
-  <!-- Desktop / Unknown fallback -->
+  <!-- Fallback / Desktop -->
   <div class="container hidden" id="screen-fallback">
-    <div class="app-icon">G</div>
-    <h1>Glitch</h1>
-    <p class="subtitle">Скачайте приложение на телефон</p>
-    <div class="store-list" id="store-list-fallback">
-      <!-- Populated by JS -->
+    <img class="logo" src="img/glitch-logo.webp" alt="Glitch">
+    <h1>Скачай мобильное приложение</h1>
+    <div class="store-list">
+      <a class="store-link" href="https://apps.apple.com/ru/app/glitch/id6746337888" target="_blank" rel="noopener">
+        <img src="img/appstore.svg" alt="App Store">
+      </a>
+      <a class="store-link" href="https://drive.google.com/file/d/13YxgMHuw981OzaufwkYe6838OjfvfNii/view?usp=sharing"
+        target="_blank" rel="noopener">
+        <img src="img/googlestore.svg" alt="Google Play">
+      </a>
+      <!-- <a class="store-link" href="https://www.rustore.ru/catalog" target="_blank" rel="noopener">
+        <img src="img/appgallery.svg" alt="RuStore">
+      </a> -->
+      <a class="store-link" href="https://appgallery.huawei.com/" target="_blank" rel="noopener">
+        <img src="img/appgallery.svg" alt="AppGallery">
+      </a>
+      <a class="store-link" href="https://drive.google.com/file/d/13YxgMHuw981OzaufwkYe6838OjfvfNii/view?usp=sharing"
+        target="_blank" rel="noopener">
+        <img src="img/apk.svg" alt="Скачать APK">
+      </a>
     </div>
   </div>
 
   <script>
-    // ═══════════════════════════════════════════════
-    // CONFIG — edit links here
-    // ═══════════════════════════════════════════════
-    const CONFIG = {
-      appName: 'Glitch',
+    (function() {
+      var ua = navigator.userAgent || navigator.vendor || ''
+      var platform = navigator.platform || ''
+      var maxTP = navigator.maxTouchPoints || 0
 
-      // iOS — auto-redirect target
-      ios: 'https://apps.apple.com/ru/app/glitch/id6746337888',
-
-      // Android stores — shown as list
-      stores: [
-        {
-          id: 'google-play',
-          name: 'Google Play',
-          label: 'Скачать из',
-          url: 'https://drive.google.com/file/d/13YxgMHuw981OzaufwkYe6838OjfvfNii/view?usp=sharing',
-          icon: 'img/googlestore.svg',
-        },
-        {
-          id: 'rustore',
-          name: 'RuStore',
-          label: 'Скачать из',
-          url: 'https://www.rustore.ru/catalog',
-          icon: null, // inline SVG used below
-        },
-        {
-          id: 'appgallery',
-          name: 'AppGallery',
-          label: 'Скачать из',
-          url: 'https://appgallery.huawei.com/',
-          icon: null, // inline SVG used below
-        },
-        {
-          id: 'apk',
-          name: 'Скачать APK',
-          label: 'Прямая ссылка',
-          url: 'https://drive.google.com/file/d/13YxgMHuw981OzaufwkYe6838OjfvfNii/view?usp=sharing',
-          icon: 'img/apk.svg',
-        },
-      ],
-    };
-    // ═══════════════════════════════════════════════
-
-    // ── Inline icons for stores without SVG files ──
-    const INLINE_ICONS = {
-      'rustore': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`,
-      'appgallery': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>`,
-    };
-
-    // ── Device detection ──
-    function detectPlatform() {
-      const ua = navigator.userAgent || navigator.vendor || window.opera || '';
-      const platform = navigator.platform || '';
-      const maxTouchPoints = navigator.maxTouchPoints || 0;
-
-      // iOS detection (covers iPhone, iPad, iPod, and iPadOS 13+ which reports as Mac)
-      const isIOS =
+      var isIOS =
         /iP(hone|od|ad)/i.test(ua) ||
         /iP(hone|od|ad)/i.test(platform) ||
-        (/Mac/i.test(platform) && maxTouchPoints > 1) ||
-        (/Macintosh/i.test(ua) && maxTouchPoints > 1);
+        (/Mac/i.test(platform) && maxTP > 1) ||
+        (/Macintosh/i.test(ua) && maxTP > 1)
 
-      if (isIOS) return 'ios';
+      var isAndroid = /Android/i.test(ua) || /HarmonyOS/i.test(ua) || /Huawei/i.test(ua)
 
-      // Android detection
-      const isAndroid = /Android/i.test(ua);
-      if (isAndroid) return 'android';
-
-      // HarmonyOS / Huawei detection (some devices)
-      if (/HarmonyOS/i.test(ua) || /Huawei/i.test(ua)) return 'android';
-
-      return 'other';
-    }
-
-    // ── Render store list ──
-    function renderStoreList(containerId) {
-      const container = document.getElementById(containerId);
-      CONFIG.stores.forEach(function(store) {
-        const a = document.createElement('a');
-        a.className = 'store-link';
-        a.href = store.url;
-        a.target = '_blank';
-        a.rel = 'noopener noreferrer';
-
-        let iconHtml = '';
-        if (store.icon) {
-          iconHtml = '<img src="' + store.icon + '" alt="" style="width:100%;height:100%;object-fit:contain;border-radius:10px;">';
-        } else if (INLINE_ICONS[store.id]) {
-          iconHtml = INLINE_ICONS[store.id];
-        }
-
-        a.innerHTML =
-          '<div class="store-link-icon">' + iconHtml + '</div>' +
-          '<div class="store-link-info">' +
-            '<div class="store-link-label">' + store.label + '</div>' +
-            '<div class="store-link-name">' + store.name + '</div>' +
-          '</div>';
-
-        container.appendChild(a);
-      });
-    }
-
-    // ── Main logic ──
-    function init() {
-      var platform = detectPlatform();
-
-      // Short delay for visual feedback
       setTimeout(function() {
-        document.getElementById('screen-detecting').classList.add('hidden');
+        document.getElementById('screen-detecting').classList.add('hidden')
 
-        if (platform === 'ios') {
-          document.getElementById('screen-ios').classList.remove('hidden');
-          document.getElementById('ios-manual-link').href = CONFIG.ios;
-          // Auto-redirect
-          window.location.href = CONFIG.ios;
-        } else if (platform === 'android') {
-          renderStoreList('store-list');
-          document.getElementById('screen-android').classList.remove('hidden');
+        if (isIOS) {
+          document.getElementById('screen-ios').classList.remove('hidden')
+          window.location.href = document.getElementById('ios-link').href
+        } else if (isAndroid) {
+          document.getElementById('screen-android').classList.remove('hidden')
         } else {
-          // Desktop / unknown — show all options
-          renderStoreList('store-list-fallback');
-          document.getElementById('screen-fallback').classList.remove('hidden');
+          document.getElementById('screen-fallback').classList.remove('hidden')
         }
-      }, 300);
-    }
-
-    init();
+      }, 250)
+    })()
   </script>
 </body>
 </html>
