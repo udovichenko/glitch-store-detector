@@ -1,0 +1,12 @@
+{
+  "name": "glitch-store-detector",
+  "version": "1.0.0",
+  "private": true,
+  "description": "QR-code landing page for Glitch app store redirect",
+  "scripts": {
+    "generate-qr": "node generate-qr.js"
+  },
+  "devDependencies": {
+    "qrcode": "^1.5.4"
+  }
+}
