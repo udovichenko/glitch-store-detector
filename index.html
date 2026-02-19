@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>Glitch — Скачать приложение</title>
-  <meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)">
-  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111111">
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -13,26 +12,12 @@
       padding: 0;
     }
 
-    :root {
-      --bg: #ffffff;
-      --text: #111111;
-      --text-secondary: #666666;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #111111;
-        --text: #f0f0f0;
-        --text-secondary: #999999;
-      }
-    }
-
     html, body {
       height: 100%;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg) url('img/bg.svg') repeat center center;
+      background: #111111 url('img/bg.svg') repeat center center;
       background-size: 600px;
-      color: var(--text);
+      color: #f0f0f0;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -40,7 +25,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 100dvh;
+      min-height: 100vh;
       padding: 24px;
     }
 
@@ -99,12 +84,12 @@
 
     .redirect-message {
       font-size: 14px;
-      color: var(--text-secondary);
+      color: #999999;
       margin-top: 8px;
     }
 
     .redirect-message a {
-      color: var(--text);
+      color: #f0f0f0;
       text-decoration: underline;
       text-underline-offset: 2px;
     }
@@ -117,8 +102,8 @@
       display: inline-block;
       width: 20px;
       height: 20px;
-      border: 2px solid var(--text-secondary);
-      border-top-color: var(--text);
+      border: 2px solid #999999;
+      border-top-color: #f0f0f0;
       border-radius: 50%;
       animation: spin 0.6s linear infinite;
       margin-bottom: 8px;
@@ -132,7 +117,7 @@
 
     .detecting {
       font-size: 14px;
-      color: var(--text-secondary);
+      color: #999999;
     }
   </style>
 </head>
